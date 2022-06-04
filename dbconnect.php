@@ -14,12 +14,10 @@ function connect() {
             // 配列をキーとバリューで返す
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
-        echo '成功です';
+        return $pdo;
     } catch(PDOException $e) {
         echo '接続失敗です', $e->getMessage();
         exit();
     }
 }
-echo connect();
-
 ?>
