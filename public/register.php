@@ -1,6 +1,16 @@
 <?php
+    session_start();
     require_once '../classes/UserLogic.php';
     $err = [];
+
+    //siginup_formから送信されたトークンがあっているか
+    $token = filter_input(INPUT_POST, 'csrf_token');
+    //トークンが一致しない、無い場合処理を中止
+    if(!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']) {
+        exit('不正なリクエストです');
+    }
+    unset($_SESSION['csrf_token']);
+
     if(!$username = filter_input(INPUT_POST, 'username')) {
         $err[] = 'ユーザー名を記入してください';
     }
