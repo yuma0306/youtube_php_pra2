@@ -1,6 +1,6 @@
 <?php
+    
     require_once '../classes/UserLogic.php';
-
     session_start();
     $err = [];
     if(!$email = filter_input(INPUT_POST, 'email')) {
@@ -14,6 +14,12 @@
         header('Location: login.php');
         return;
     }
+    // ログイン成功時の処理
+    $result = UserLogic::login($email,$password);
+    if(!$result) {
+        header('Location: login.php');
+    }
+    echo 'ログイン成功です';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
